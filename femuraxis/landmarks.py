@@ -2,6 +2,9 @@
 import numpy as np
 from scipy import ndimage
 
+# knee_offset over all 101 HFValid femurs, used when no training data is at hand (inference)
+KNEE_OFFSET_HFVALID = np.array([-0.057, 2.901, 2.646])
+
 
 def surface_points(mask):
     z, y, x = np.nonzero(mask & ~ndimage.binary_erosion(mask))
