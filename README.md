@@ -47,5 +47,7 @@ to statistics.
 
 ## Data
 
-- HFValid: amsacta.unibo.it/8431 (CC BY 4.0)
-- VSD: doi.org/10.5281/zenodo.8302448 (CC BY-NC-SA 4.0), downloaded by `preprocessing/prepare_vsd.py`
+- HFValid: [amsacta.unibo.it/8431](https://amsacta.unibo.it/8431/) (CC BY 4.0)
+- VSD: [doi.org/10.5281/zenodo.8302448](https://doi.org/10.5281/zenodo.8302448) (CC BY-NC-SA 4.0), with expert
+  landmarks from [VSDFullBodyBoneModels](https://github.com/MCM-Fischer/VSDFullBodyBoneModels);
+  both downloaded by `preprocessing/prepare_vsd.py`
