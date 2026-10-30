@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "femuraxis"
+version = "0.1.0"
+description = "Femoral mechanical axis from biplanar synthetic X-rays: AttentionUNet vs SwinUNETR"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy",
+    "scipy",
+    "pandas",
+    "matplotlib",
+    "SimpleITK",
+    "vtk",
+    "torch",
+    "monai==1.6.1",
+    "einops",
+    "pyyaml",
+]
+
+[tool.setuptools]
+packages = ["femuraxis"]
