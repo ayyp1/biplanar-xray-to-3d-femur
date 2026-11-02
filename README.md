@@ -18,7 +18,7 @@ Saves the 3D femur mask, hip/knee centres and axis, and a preview image. Weights
 [Hugging Face](https://huggingface.co/ayyp/biplanar-xray-to-3d-femur). Inputs must be in the project's DRR format
 (AP 256×96, LAT 256×128 pixels at 2 mm, hip at the top).
 
-You don't need a GPU. I ran it on a Raspberry Pi 4 with ONNX Runtime: about 22 s per model, 110 s for all 5.
+No GPU needed. It runs on a Raspberry Pi 4, the computer that costs less than the X-ray :) about 22 s per model, under 2 minutes for all five.
 
 ```bash
 pip install onnx onnxruntime
