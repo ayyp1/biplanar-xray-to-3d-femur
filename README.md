@@ -21,10 +21,17 @@ Saves the 3D femur mask, hip/knee centres and axis, and a preview image. Weights
 No GPU needed. It runs on a Raspberry Pi 4, the computer that costs less than the X-ray :) about 22 s per model, under 2 minutes for all five.
 
 ```bash
-pip install onnx onnxruntime
+# on your laptop: export the models (weights/ is filled by the predict.py run above)
+pip install onnx
 python deploy/export_onnx.py --weights weights --out onnx
+scp -r onnx pi@<pi-ip>:biplanar-xray-to-3d-femur/
+
+# on the Pi (64-bit Pi OS, repo cloned and installed with pip install -e .)
+pip install onnxruntime
 python deploy/pi_demo.py --ap ap.png --lat lat.png --onnx onnx
 ```
+
+The export also works on the Pi itself, it just takes about 6 minutes per model.
 
 ## Training
 
