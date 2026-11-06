@@ -4,6 +4,8 @@ Recovering the femoral mechanical axis (hip centre → knee centre) from two syn
 via 3D femur reconstruction. Compares AttentionUNet (1.5M params) and SwinUNETR (62M) on HFValid
 (101 CTs, 5-fold CV) with an external test on VSD.
 
+![pipeline](assets/pipeline.png)
+
 **Result:** with the same training recipe, both models recover the axis to about 0.5° on HFValid and 0.6–0.7° on
 VSD, so the small CNN matches the transformer. The remaining error is set mainly by locating the femoral head,
 not by the architecture, the knee rule, or Dice. Full method and results: [report](report.pdf).
