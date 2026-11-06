@@ -5,7 +5,8 @@ via 3D femur reconstruction. Compares AttentionUNet (1.5M params) and SwinUNETR 
 (101 CTs, 5-fold CV) with an external test on VSD.
 
 **Result:** with the same training recipe, both models recover the axis to about 0.5° on HFValid and 0.6–0.7° on
-VSD, so the small CNN matches the transformer. Full method and results: [report](report.pdf).
+VSD, so the small CNN matches the transformer. The remaining error is set mainly by locating the femoral head,
+not by the architecture, the knee rule, or Dice. Full method and results: [report](report.pdf).
 
 ## Inference
 
@@ -59,6 +60,21 @@ python evaluation/compare.py results/hfvalid_cv.csv --a attnC --b swinC
 Cross-validation, robustness and VSD external test write per-case CSVs to `results/`; `compare.py` runs the
 paired statistics. `bash run_pipeline.sh /path/to/HFValid_Collection_v3` runs everything from preprocessing
 to statistics.
+
+## Landmark analysis
+
+What limits the axis is studied separately from the reconstruction. These were run on Kaggle (paths under
+`/kaggle/input`); each notebook's first cell lists the datasets it expects.
+
+- `notebooks/landmark_3d_learned.ipynb` — a learned 3D landmark extractor (U-Net heatmaps) against the
+  rule-based one, on true and predicted masks.
+- `notebooks/landmark_2d_baseline.ipynb` and `landmark_2d_nested_selection.ipynb` — a 2D baseline that
+  triangulates landmarks from the two views, with the epoch chosen on the held-out fold (0.46°) and on an inner
+  split (0.62°); the gap shows how optimistic held-out selection is.
+- `notebooks/axis_error_geometry.ipynb` — splits each landmark error into along- and across-axis parts.
+- `evaluation/observer_variability.py` — expert-vs-expert and single-vs-consensus disagreement from the VSD
+  raters, the scale the errors are compared against. Needs the `Rater1.mat`–`Rater5.mat` files from
+  [VSDFullBodyBoneModels](https://github.com/MCM-Fischer/VSDFullBodyBoneModels).
 
 ## Data
 
