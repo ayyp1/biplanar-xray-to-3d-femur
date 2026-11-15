@@ -8,7 +8,9 @@ via 3D femur reconstruction. Compares AttentionUNet (1.5M params) and SwinUNETR 
 
 **Result:** with the same training recipe, both models recover the axis to about 0.5° on HFValid and 0.6–0.7° on
 VSD, so the small CNN matches the transformer. The remaining error is set mainly by locating the femoral head,
-not by the architecture, the knee rule, or Dice. Full method and results: [report](report.pdf).
+not by the architecture, the knee rule, or Dice; a direct 2D landmark baseline lands in the same range, so 3D
+reconstruction is not required for this particular measurement. Full method and results:
+[report](https://ashishkpokharel.com.np/papers/femur-mechanical-axis.pdf).
 
 ## Inference
 
@@ -47,7 +49,8 @@ python training/train.py --config configs/swinC.yaml --data preprocessed
 
 Trains the 5 cross-validation folds of each model; `--fold 0` trains one. All hyperparameters (architecture,
 epochs, learning rate, augmentation) are in `configs/*.yaml`. Checkpoints go to `checkpoints/` and an
-interrupted run resumes from the last epoch. Both models together take about 15 GPU-hours on T4s.
+interrupted run resumes from the last epoch. Both models together take about 30 GPU-hours on T4s
+(≈9.5 h for AttentionUNet, ≈21.5 h for SwinUNETR).
 
 ## Evaluation
 
@@ -72,7 +75,8 @@ What limits the axis is studied separately from the reconstruction. These were r
   rule-based one, on true and predicted masks.
 - `notebooks/landmark_2d_baseline.ipynb` and `landmark_2d_nested_selection.ipynb` — a 2D baseline that
   triangulates landmarks from the two views, with the epoch chosen on the held-out fold (0.46°) and on an inner
-  split (0.62°); the gap shows how optimistic held-out selection is.
+  split the outer fold never enters (0.67°); the 3D models (0.53–0.55°) sit between the two, so the internal
+  comparison turns on how the checkpoint is selected rather than on 2D vs 3D.
 - `notebooks/axis_error_geometry.ipynb` — splits each landmark error into along- and across-axis parts.
 - `evaluation/observer_variability.py` — expert-vs-expert and single-vs-consensus disagreement from the VSD
   raters, the scale the errors are compared against. Needs the `Rater1.mat`–`Rater5.mat` files from
