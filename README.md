@@ -1,4 +1,4 @@
-# biplanar-xray-to-3d-femur
+# Biplanar-xray-to-3d-femur
 
 Recovering the femoral mechanical axis (hip centre → knee centre) from two synthetic X-rays (AP + lateral)
 via 3D femur reconstruction. Compares AttentionUNet (1.5M params) and SwinUNETR (62M) on HFValid
